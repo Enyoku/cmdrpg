@@ -15,7 +15,10 @@ type Enemy struct {
 	MP   int
 }
 
-type Enemys[E Enemy] struct{}
+type Enemies struct {
+	Id int
+	Enemy
+}
 
 type Player struct {
 	Name string
@@ -26,6 +29,7 @@ type Player struct {
 	EXP  int
 }
 
+// Enemy struct methods
 func (e *Enemy) Attack() int {
 	return e.DMG
 }
@@ -50,6 +54,7 @@ func (e *Enemy) Spell() int {
 	return 0
 }
 
+// Player struct methods
 func (p *Player) Attack() int {
 	return p.DMG
 }
@@ -70,6 +75,20 @@ func (p *Player) Spell() int {
 	if p.IsManaEmpty() {
 		p.MP -= 5
 		return p.DMG + 10
+	}
+	return 0
+}
+
+func (p *Player) LvlUp() int {
+	if p.EXP >= 25 {
+		p.LVL += 1
+	}
+	return 0
+}
+
+func (p *Player) ExpGain(e *Enemy) int {
+	if !e.IsAlive() {
+		p.EXP += 5
 	}
 	return 0
 }
