@@ -14,7 +14,7 @@ type model struct {
 
 func InitialModel() model {
 	return model{
-		choices: []string{" Buy cattor", "clee", "ddd"},
+		choices: []string{"Start new game", "Load game"},
 
 		selected: make(map[int]struct{}),
 	}
@@ -61,7 +61,7 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 func (m model) View() string {
 	// The header
-	s := "What should we buy at the market?\n\n"
+	s := "Welcome to the cmdrpg!\n\n"
 
 	// Iterate over our choices
 	for i, choice := range m.choices {
@@ -75,7 +75,10 @@ func (m model) View() string {
 		// Is this choise selected?
 		checked := " " // not selected
 		if _, ok := m.selected[i]; ok {
-			checked = "x" // selected
+			checked = "x" // selected -----------
+			// if ok && checked != " " {
+			// 	// fmt.Printf("\n---\nYou chose %s!\n", v)
+			// }
 		}
 
 		// Render the row
